@@ -23,7 +23,7 @@ PS: I used my personal laptop to preprocess the image/video data and pushed it t
 
 
 
-## **<font style="color:rgb(134,19,348)">Step 4: Implement the ConvLSTM Approach</font>**
+## **<font style="color:rgb(134,19,348)"> Implement the ConvLSTM Approach</font>**
 In this step, we will implement the first approach by using a combination of ConvLSTM cells. A ConvLSTM cell is a variant of an LSTM network that contains convolutions operations in the network. it is an LSTM with convolution embedded in the architecture, which makes it capable of identifying spatial features of the data while keeping into account the temporal relation. 
 
 <center>
@@ -36,7 +36,7 @@ For video classification, this approach effectively captures the spatial relatio
 You can read the paper [**Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting**](https://arxiv.org/abs/1506.04214v1) by **Xingjian Shi** (NIPS 2015), to learn more about this architecture.
 
 
-### **<font style="color:rgb(134,19,348)">Step 4.1: Construct the Model</font>**
+### **<font style="color:rgb(134,19,348)">Construct the Model</font>**
 
 
 To construct the model, we will use Keras [**`ConvLSTM2D`**](https://keras.io/api/layers/recurrent_layers/conv_lstm2d) recurrent layers. The **`ConvLSTM2D`** layer also takes in the number of filters and kernel size required for applying the convolutional operations. The output of the layers is flattened in the end and is fed to the **`Dense`** layer with softmax activation which outputs the probability of each action category. 
@@ -44,7 +44,7 @@ To construct the model, we will use Keras [**`ConvLSTM2D`**](https://keras.io/ap
 We will also use **`MaxPooling3D`** layers to reduce the dimensions of the frames and avoid unnecessary computations and **`Dropout`** layers to prevent [overfitting](https://en.wikipedia.org/wiki/Overfitting) the model on the data. The architecture is a simple one and has a small number of trainable parameters. This is because we are only dealing with a small subset of the dataset which does not require a large-scale model.
 
 
-## **<font style="color:rgb(134,19,348)">Step 5: Implement the LRCN Approach</font>**
+## **<font style="color:rgb(134,19,348)">Implement the LRCN Approach</font>**
 
 In this step, we will implement the LRCN Approach by combining Convolution and LSTM layers in a single model. Another similar approach can be to use a CNN model and LSTM model trained separately. The CNN model can be used to extract spatial features from the frames in the video, and for this purpose, a pre-trained model can be used, that can be fine-tuned for the problem. And the LSTM model can then use the features extracted by CNN, to predict the action being performed in the video. 
 
@@ -65,7 +65,7 @@ We will also use [**`TimeDistributed`**](https://keras.io/api/layers/recurrent_l
 </center>
 
 
-### **<font style="color:rgb(134,19,348)">Step 5.1: Construct the Model</font>**
+### **<font style="color:rgb(134,19,348)">Construct the Model</font>**
 
 To implement our LRCN architecture, we will use time-distributed **`Conv2D`** layers which will be followed by **`MaxPooling2D`** and **`Dropout`** layers. The feature extracted from the **`Conv2D`** layers will be then flattened using the  **`Flatten`** layer and will be fed to a **`LSTM`** layer. The **`Dense`** layer with softmax activation will then use the output from the **`LSTM`** layer to predict the action being performed.
 
